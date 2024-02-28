@@ -1,6 +1,30 @@
 #include "shell.h"
 
 /**
+ * sh_printenv - print the environment variables.
+ * @args: arguments if any.
+ * Return: 1 on success.
+ */
+int sh_printenv(char **args)
+{
+	int i = 0, j = 0;
+
+	(void) args;
+	while (environ[i])
+	{
+		j = 0;
+		while (environ[i][j])
+		{
+			_putchar(environ[i][j]);
+			j++;
+		}
+		if (j != 0)
+			_putchar('\n');
+		i++;
+	}
+	return (1);
+}
+/**
  * sh_cd - changes the working directory of the shell.
  * @args: an array of the command and its arguments.
  * Return: 1 on success.
@@ -8,11 +32,22 @@
 
 int sh_cd(char **args)
 {
+	char *home;
+
 	if (args[1] == NULL)
-		error("expected argument to \"cd\"\n");
+	{
+		home = _getenv("HOME");
+		if (chdir(home) != 0)
+		{
+			perror("hsh");
+			free(home);
+		}
+		else
+			free(home);
+	}
 	else
 		if (chdir(args[1]) != 0)
-			perror("sh");
+			perror("hsh");
 	return (1);
 }
 

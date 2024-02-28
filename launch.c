@@ -20,6 +20,6 @@ int launch(char **args, char **av)
 			error(av[0]);
 	do {
 		pid_status = waitpid(pid, &pid_status, 0);
-	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	} while (!WIFEXITED(pid_status) && !WIFSIGNALED(pid_status));
 	return (1);
 }

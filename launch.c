@@ -18,6 +18,8 @@ int launch(char **args, char **av)
 	if (pid == 0)
 		if (execv(args[0], args) == -1)
 			error(av[0]);
-	pid_status = waitpid(pid, &pid_status, 0);
+	do {
+		pid_status = waitpid(pid, &pid_status, 0);
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	return (1);
 }

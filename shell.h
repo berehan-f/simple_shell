@@ -40,8 +40,10 @@ char *read_stream(void);
 char **split_line(char *);
 int execute(char **, char **);
 int launch(char **, char **);
+<<<<<<< HEAD
 
 /** builtin commands */
 int sh_exit(char **);
 int sh_cd(char **);
+int sh_printenv(char **);
 #endif

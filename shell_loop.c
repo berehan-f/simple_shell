@@ -13,7 +13,7 @@ void sh_loop_int(char **av)
 	int status;
 
 	do {
-		write(1, "$ ", 2);
+		write(1, "#cisfun$ ", 9);
 		line = read_line();
 		args = split_line(line);
 		status = execute(args, av);

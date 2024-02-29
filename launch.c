@@ -16,10 +16,15 @@ int launch(char **args, char **av)
 	if (pid == -1)
 		error("Can't fork process:");
 	if (pid == 0)
+	{
 		if (execv(args[0], args) == -1)
 			error(av[0]);
-	do {
-		pid_status = waitpid(pid, &pid_status, 0);
-	} while (!WIFEXITED(pid_status) && !WIFSIGNALED(pid_status));
+	}
+	else
+	{
+		do {
+			pid_status = waitpid(pid, &pid_status, 0);
+		} while (!WIFEXITED(pid_status) && !WIFSIGNALED(pid_status));
+	}
 	return (1);
 }

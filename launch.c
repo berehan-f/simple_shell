@@ -17,7 +17,7 @@ int launch(char **args, char **av)
 		error("Can't fork process:");
 	if (pid == 0)
 	{
-		if (execv(args[0], args) == -1)
+		if (execve(args[0], args, environ) == -1)
 			error(av[0]);
 	}
 	else

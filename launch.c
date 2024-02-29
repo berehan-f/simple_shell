@@ -9,6 +9,7 @@
 
 int launch(char **args, char **av)
 {
+	struct stat stat_buf;
 	pid_t pid;
 	int pid_status;
 
@@ -17,8 +18,15 @@ int launch(char **args, char **av)
 		error("Can't fork process:");
 	if (pid == 0)
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (stat(args[0], &stat_buf) == 0)
+		{
+			if (execve(args[0], args, environ) == -1)
+				error(av[0]);
+		}
+		else
+		{
 			error(av[0]);
+		}
 	}
 	else
 	{
